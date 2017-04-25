@@ -94,6 +94,25 @@ public class FinalProject {
         }
 	}//End of Bubble Sort Method
 	
+	public static void insertionSort(int[] arr){
+        comparisons = 0;
+        assignments = 0;
+        int temp;
+        for (int i = 1; i < arr.length; i++) {
+        	comparisons++;
+            for(int j = i ; j > 0 ; j--){
+            	comparisons++;
+                if(arr[j] < arr[j-1]){
+                    temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+                    assignments += 3;
+                }
+            }
+        }        
+    }
+
+	
 	 private static void quickSort(int[] arr, int lo, int hi)
 	 {
 		    /*Quicksort(A[l..r])
