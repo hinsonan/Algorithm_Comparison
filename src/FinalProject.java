@@ -8,20 +8,23 @@ public class FinalProject {
 	
 	public static void main(String[] args) {
 		//inialialize all the arrays needed
-		int[] arrayHundred = GenerateArray(100);
-		int[] arrayThousand = GenerateArray(1000);
-		int[] arrayTenThousand = GenerateArray(10000);
-		int[] arrayHundredThousand = GenerateArray(100000);
-		int[] arrayMillion = GenerateArray(1000000);
+		int[] arrayHundred = generateArray(100);
+		int[] arrayThousand = generateArray(1000);
+		int[] arrayTenThousand = generateArray(10000);
+		int[] arrayHundredThousand = generateArray(100000);
+		int[] arrayMillion = generateArray(1000000);
 		int[] bubArrHundred = arrayHundred.clone();
 		int[] bubArrThousand = arrayThousand.clone();
-		int[] bubArrTenThousand = arrayTenThousand.clone();		
+		int[] bubArrTenThousand = arrayTenThousand.clone();
+		int[] insArrHundred = arrayHundred.clone();
+		int[] insArrThousand = arrayThousand.clone();
+		int[] insArrTenThousand = arrayTenThousand.clone();
 		
 		/* Does a bubble sorts on arrays of 100 1000 10000
 		 * Once each sort is done then it will print the array in rows of 20
 		 * It will then display the number of comparisons and assignments performed
 		 */
-		BubbleSort(bubArrHundred);
+		bubbleSort(bubArrHundred);
 		
 		printElementsInArray(bubArrHundred);
 		
@@ -30,7 +33,7 @@ public class FinalProject {
 		System.out.println("");
 		System.out.println("");
 		
-		BubbleSort(bubArrThousand);
+		bubbleSort(bubArrThousand);
 		
 		printElementsInArray(bubArrThousand);
 		
@@ -39,16 +42,44 @@ public class FinalProject {
 		System.out.println("");
 		System.out.println("");
 		
-		BubbleSort(bubArrTenThousand);
+		bubbleSort(bubArrTenThousand);
 		
 		printElementsInArray(bubArrTenThousand);
 		
 		printComparisonsAndAssignments("Bubble Sort", 10000);
+		
+		System.out.println("");
+		System.out.println("");
+		
+		insertionSort(insArrHundred);
+		
+		printElementsInArray(insArrHundred);
+		
+		printComparisonsAndAssignments("Insertion Sort", 100);
+		
+		System.out.println("");
+		System.out.println("");
+		
+		insertionSort(insArrThousand);
+		
+		printElementsInArray(insArrThousand);
+		
+		printComparisonsAndAssignments("Insertion Sort", 1000);
+		
+		System.out.println("");
+		System.out.println("");
+		
+		insertionSort(insArrTenThousand);
+		
+		printElementsInArray(insArrTenThousand);
+		
+		printComparisonsAndAssignments("Insertion Sort", 10000);
+		
 
 	}//End of main
 	
 	//gives you an array of n size that is full of random numbers
-	private static int[] GenerateArray(int size){
+	private static int[] generateArray(int size){
 		int[] array = new int[size];
 		Random rand = new Random();		
 		for(int i = 0; i < array.length - 1; i++){
@@ -58,7 +89,7 @@ public class FinalProject {
 	}//end of GenerateArray
 	
 	//bubble sort method
-	private static void BubbleSort(int[] bubArray){
+	private static void bubbleSort(int[] bubArray){
 		//resets the counter variables
 		comparisons = 0;
 		assignments = 0;
@@ -127,7 +158,7 @@ public class FinalProject {
 		 
 		 if(lo < hi)
 		 {
-			 int s = HoarePartition(arr, lo, hi);			 
+			 int s = hoarePartition(arr, lo, hi);			 
 			 quickSort(arr, lo, s );
 			 quickSort(arr, s + 1 , hi);
 			 
@@ -137,7 +168,7 @@ public class FinalProject {
 	
 
 	
-	public static int HoarePartition(int[] arr, int lo, int hi) {
+	public static int hoarePartition(int[] arr, int lo, int hi) {
 		  //this other way took some research on manipulating loops but performs much better than my previous code
 		  //part of the issues in the code I had was because of the do while loops
 		  //with this approach we simplify the algorithm using incrementing arrays within a while loop which cuts down on the code you have to write
