@@ -7,75 +7,9 @@ public class FinalProject {
 	static int assignments = 0;
 	
 	public static void main(String[] args) {
-		//inialialize all the arrays needed
-		int[] arrayHundred = generateArray(100);
-		int[] arrayThousand = generateArray(1000);
-		int[] arrayTenThousand = generateArray(10000);
-		int[] arrayHundredThousand = generateArray(100000);
-		int[] arrayMillion = generateArray(1000000);
-		int[] bubArrHundred = arrayHundred.clone();
-		int[] bubArrThousand = arrayThousand.clone();
-		int[] bubArrTenThousand = arrayTenThousand.clone();
-		int[] insArrHundred = arrayHundred.clone();
-		int[] insArrThousand = arrayThousand.clone();
-		int[] insArrTenThousand = arrayTenThousand.clone();
+		computeBubbleSort();		
 		
-		/* Does a bubble sorts on arrays of 100 1000 10000
-		 * Once each sort is done then it will print the array in rows of 20
-		 * It will then display the number of comparisons and assignments performed
-		 */
-		bubbleSort(bubArrHundred);
 		
-		printElementsInArray(bubArrHundred);
-		
-		printComparisonsAndAssignments("Bubble Sort", 100);
-		
-		System.out.println("");
-		System.out.println("");
-		
-		bubbleSort(bubArrThousand);
-		
-		printElementsInArray(bubArrThousand);
-		
-		printComparisonsAndAssignments("Bubble Sort", 1000);
-		
-		System.out.println("");
-		System.out.println("");
-		
-		bubbleSort(bubArrTenThousand);
-		
-		printElementsInArray(bubArrTenThousand);
-		
-		printComparisonsAndAssignments("Bubble Sort", 10000);
-		
-		System.out.println("");
-		System.out.println("");
-		
-		insertionSort(insArrHundred);
-		
-		printElementsInArray(insArrHundred);
-		
-		printComparisonsAndAssignments("Insertion Sort", 100);
-		
-		System.out.println("");
-		System.out.println("");
-		
-		insertionSort(insArrThousand);
-		
-		printElementsInArray(insArrThousand);
-		
-		printComparisonsAndAssignments("Insertion Sort", 1000);
-		
-		System.out.println("");
-		System.out.println("");
-		
-		insertionSort(insArrTenThousand);
-		
-		printElementsInArray(insArrTenThousand);
-		
-		printComparisonsAndAssignments("Insertion Sort", 10000);
-		
-
 	}//End of main
 	
 	//gives you an array of n size that is full of random numbers
@@ -219,5 +153,38 @@ public class FinalProject {
 				+ "Comparisons: " + comparisons + "\n"
 				+ "Assignments: " + assignments);
 	}//End of printComparisonsAndAssignments
+	
+	//this method will compute the comparisons and assignments
+	public static void computeBubbleSort(){
+		int[] arrayHundred = generateArray(100);
+		int[] arrayThousand = generateArray(1000);
+		int[] arrayTenThousand = generateArray(10000);
+		//this array will keep track of the comparisons and assignments
+		int[] compareAndAssign = new int[6];
+		
+		bubbleSort(arrayHundred);
+		
+		compareAndAssign[0] = comparisons;
+		compareAndAssign[1] = assignments;	
+		
+		bubbleSort(arrayThousand);
+		
+		compareAndAssign[2] = comparisons;
+		compareAndAssign[3] = assignments;
+		
+		
+		bubbleSort(arrayTenThousand);
+		
+		compareAndAssign[4] = comparisons;
+		compareAndAssign[5] = assignments;
+		
+		System.out.print("Bubble Sort \t 100 \t\t1000 \t\t 10000\n"
+						+ "1. \t      " + compareAndAssign[0]+ "/" + compareAndAssign[1]+ "\t  "+compareAndAssign[2]
+						+"/"+ compareAndAssign[3]+ "\t   "+ compareAndAssign[4]+ "/"+ compareAndAssign[5]);
+		
+		
+		
+				
+	}
 
 }
