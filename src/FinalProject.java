@@ -7,7 +7,9 @@ public class FinalProject {
 	static int assignments = 0;
 	
 	public static void main(String[] args) {
-		computeBubbleSort();		
+		computeBubbleSort();	
+		
+		
 		
 		
 	}//End of main
@@ -156,35 +158,56 @@ public class FinalProject {
 	
 	//this method will compute the comparisons and assignments
 	public static void computeBubbleSort(){
-		int[] arrayHundred = generateArray(100);
-		int[] arrayThousand = generateArray(1000);
-		int[] arrayTenThousand = generateArray(10000);
-		//this array will keep track of the comparisons and assignments
-		int[] compareAndAssign = new int[6];
+		int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0, compareAvgTenThousand = 0, assignAvgTenThousand = 0;
 		
-		bubbleSort(arrayHundred);
+		int i = 0;
 		
-		compareAndAssign[0] = comparisons;
-		compareAndAssign[1] = assignments;	
-		
-		bubbleSort(arrayThousand);
-		
-		compareAndAssign[2] = comparisons;
-		compareAndAssign[3] = assignments;
-		
-		
-		bubbleSort(arrayTenThousand);
-		
-		compareAndAssign[4] = comparisons;
-		compareAndAssign[5] = assignments;
-		
-		System.out.print("Bubble Sort \t 100 \t\t1000 \t\t 10000\n"
-						+ "1. \t      " + compareAndAssign[0]+ "/" + compareAndAssign[1]+ "\t  "+compareAndAssign[2]
-						+"/"+ compareAndAssign[3]+ "\t   "+ compareAndAssign[4]+ "/"+ compareAndAssign[5]);
-		
-		
+		System.out.print("Bubble Sort \t 100 \t\t1000 \t\t 10000\n");
+		int loopcount = 1;
+		while(loopcount <= 5)
+		{
+			int[] arrayHundred = generateArray(100);
+			int[] arrayThousand = generateArray(1000);
+			int[] arrayTenThousand = generateArray(10000);
+			//this array will keep track of the comparisons and assignments
+			int[] compare = new int[3];
+			int[] assign = new int[3];
+			
+			bubbleSort(arrayHundred);
+			
+			compare[0] = comparisons;
+			assign[0] = assignments;
+			
+			compareAvgHundred += comparisons;
+			assignAvgHundred += assignments;
+			
+			bubbleSort(arrayThousand);
+			
+			compare[1] = comparisons;
+			assign[1] = assignments;
+			
+			compareAvgThousand += comparisons;
+			assignAvgThousand += assignments;
+			
+			
+			bubbleSort(arrayTenThousand);
+			
+			compare[2] = comparisons;
+			assign[2] = assignments;
+			
+			compareAvgTenThousand += comparisons;
+			assignAvgTenThousand += assignments;
+			
+			System.out.print(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+							+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] +"\n");
+			
+			loopcount++;
+			
+		}
+		System.out.print("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+				+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);		
 		
 				
-	}
+	}//End of computeBubbleSort
 
 }
