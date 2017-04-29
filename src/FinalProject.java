@@ -9,7 +9,25 @@ public class FinalProject {
 	public static void main(String[] args) {
 		computeBubbleSort();	
 		
+		System.out.println(" ");
+		System.out.println(" ");
 		
+		computeInsertionSort();
+		
+		System.out.println(" ");
+		System.out.println(" ");
+		
+		computeSelectionSort();
+		
+		System.out.println(" ");
+		System.out.println(" ");
+		
+		computeQuickSort();
+		
+		System.out.println(" ");
+		System.out.println(" ");
+		
+		computeMergeSort();
 		
 		
 	}//End of main
@@ -19,7 +37,7 @@ public class FinalProject {
 		int[] array = new int[size];
 		Random rand = new Random();		
 		for(int i = 0; i < array.length - 1; i++){
-			array[i] = rand.nextInt(size * 2);
+			array[i] = rand.nextInt(size * 10);
 		}
 		return array;
 	}//end of GenerateArray
@@ -77,7 +95,37 @@ public class FinalProject {
                 }
             }
         }        
-    }
+    }//End of insertionSort
+	
+	public static void selectionSort(int[] selectArray){
+		comparisons = 0;
+		assignments = 0;
+		int n = selectArray.length;
+		
+		 for (int i = 0; i < n - 1; i++)
+	        {
+			 	comparisons++;
+			 	//stores the index of the value of i
+	            int index = i;
+	            for (int j = i + 1; j < n; j++)
+	            {
+	            	comparisons++;
+	            	// if the array at index j is less than the array at index then index = j
+	                if (selectArray[j] < selectArray[index]){
+	                	comparisons++;
+	                	index = j;
+	                }
+	            }      
+	            // this smaller number is equal to the array at index
+	            int smallerNumber = selectArray[index]; 
+	            // makes the value at index equal value at index i
+	            selectArray[index] = selectArray[i];
+	            // value at index i will now be the value of the smaller number
+	            selectArray[i] = smallerNumber;
+	            assignments += 3;
+	        }
+	        
+	    }
 
 	
 	 private static void quickSort(int[] arr, int lo, int hi)
@@ -125,8 +173,10 @@ public class FinalProject {
 	    	  * every time these loops are false the variable will increase
 	    	  * the loops will stop when a[i] >= pivot or a[j] <= pivot depending on which loop it is
 	    	  */ 
-	         while (arr[++i] < p); 
-	         while (arr[--j] > p); 
+	         while (arr[++i] < p)
+	        	 comparisons++;	         
+	         while (arr[--j] > p)
+	        	 assignments++; 
 	 
 	         if (i >= j) {
 	        	 //this breaks out of the while(true) loop
@@ -136,8 +186,73 @@ public class FinalProject {
 	         int temp = arr[i];
 		     arr[i] = arr[j];
 		     arr[j] = temp;
+		     assignments+=3;
 	      }
 	   }//End of Hoare Partition
+	
+	 public static void mergeSort(int[] arr) {
+		 //initialize the size of array
+	     int size = arr.length;
+	     if (size < 2)
+	         return;
+	     //gets the middle index of array
+	     int mid = size / 2;
+	     //left size and right size will now be initialized in order to break the array apart
+	     int leftSize = mid;
+	     int rightSize = size - mid;
+	     //makes an array for the left part
+	     int[] left = new int[leftSize];
+	     //makes an array for the right part
+	     int[] right = new int[rightSize];
+	     //these next 2 for loops fill the array with the correct numbers from the original array
+	     for (int i = 0; i < mid; i++) {
+	         left[i] = arr[i];
+	         assignments++;
+
+	     }
+	     for (int i = mid; i < size; i++) {
+	         right[i - mid] = arr[i];
+	         assignments++;
+	     }
+	     mergeSort(left);
+	     mergeSort(right);
+	     merge(left, right, arr);
+	    }
+
+	    public static void merge(int[] left, int[] right, int[] arr) {
+	    	//get the length of the arrays
+	        int leftSize = left.length;
+	        int rightSize = right.length;
+	        int i = 0, j = 0, k = 0;
+	        //this loop will put the numbers in the correct order 
+	        while (i < leftSize && j < rightSize) {
+	            if (left[i] <= right[j]) {
+	            	comparisons++;
+	                arr[k] = left[i];
+	                assignments++;
+	                i++;
+	                k++;
+	            } else {
+	                arr[k] = right[j];
+	                comparisons++;
+	                assignments++;
+	                k++;
+	                j++;
+	            }
+	        }
+	        while (i < leftSize) {
+	            arr[k] = left[i];
+	            assignments++;
+	            k++;
+	            i++;
+	        }
+	        while (j < leftSize) {
+	            arr[k] = right[j];
+	            assignments++;
+	            k++;
+	            j++;
+	        }
+	    }
 	
 	private static void printElementsInArray(int[] arr){
 		 //prints the elements in array
@@ -158,11 +273,11 @@ public class FinalProject {
 	
 	//this method will compute the comparisons and assignments
 	public static void computeBubbleSort(){
+		//initializes the variables to keep up with the average
 		int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0, compareAvgTenThousand = 0, assignAvgTenThousand = 0;
 		
-		int i = 0;
-		
 		System.out.print("Bubble Sort \t 100 \t\t1000 \t\t 10000\n");
+		//controls the while loop
 		int loopcount = 1;
 		while(loopcount <= 5)
 		{
@@ -209,5 +324,281 @@ public class FinalProject {
 		
 				
 	}//End of computeBubbleSort
+	
+	public static void computeInsertionSort(){
+		//initializes the variables to keep up with the average
+		int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0, compareAvgTenThousand = 0, assignAvgTenThousand = 0;
+		
+		System.out.print("Insertion Sort \t 100 \t\t1000 \t\t 10000\n");
+		//controls the while loop
+		int loopcount = 1;
+		while(loopcount <= 5)
+		{
+			int[] arrayHundred = generateArray(100);
+			int[] arrayThousand = generateArray(1000);
+			int[] arrayTenThousand = generateArray(10000);
+			//this array will keep track of the comparisons and assignments
+			int[] compare = new int[3];
+			int[] assign = new int[3];
+			
+			insertionSort(arrayHundred);
+			
+			compare[0] = comparisons;
+			assign[0] = assignments;
+			
+			compareAvgHundred += comparisons;
+			assignAvgHundred += assignments;
+			
+			insertionSort(arrayThousand);
+			
+			compare[1] = comparisons;
+			assign[1] = assignments;
+			
+			compareAvgThousand += comparisons;
+			assignAvgThousand += assignments;
+			
+			
+			insertionSort(arrayTenThousand);
+			
+			compare[2] = comparisons;
+			assign[2] = assignments;
+			
+			compareAvgTenThousand += comparisons;
+			assignAvgTenThousand += assignments;
+			
+			System.out.print(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+							+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] +"\n");
+			
+			loopcount++;
+			
+		}
+		System.out.print("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+				+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);		
+		
+				
+	}//End of computeInsertionSort
+	public static void computeSelectionSort(){
+		//initializes the variables to keep up with the average
+		int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0, compareAvgTenThousand = 0, assignAvgTenThousand = 0;
+		
+		System.out.print("Selection Sort \t 100 \t\t1000 \t\t 10000\n");
+		//controls the while loop
+		int loopcount = 1;
+		while(loopcount <= 5)
+		{
+			int[] arrayHundred = generateArray(100);
+			int[] arrayThousand = generateArray(1000);
+			int[] arrayTenThousand = generateArray(10000);
+			//this array will keep track of the comparisons and assignments
+			int[] compare = new int[3];
+			int[] assign = new int[3];
+			
+			selectionSort(arrayHundred);
+			
+			compare[0] = comparisons;
+			assign[0] = assignments;
+			
+			compareAvgHundred += comparisons;
+			assignAvgHundred += assignments;
+			
+			selectionSort(arrayThousand);
+			
+			compare[1] = comparisons;
+			assign[1] = assignments;
+			
+			compareAvgThousand += comparisons;
+			assignAvgThousand += assignments;
+			
+			
+			selectionSort(arrayTenThousand);
+			
+			compare[2] = comparisons;
+			assign[2] = assignments;
+			
+			compareAvgTenThousand += comparisons;
+			assignAvgTenThousand += assignments;
+			
+			System.out.print(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t     "+compare[1]
+							+"/"+ assign[1]+ "      "+ compare[2]+ "/"+ assign[2] +"\n");
+			
+			loopcount++;
+			
+		}
+		System.out.print("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t     " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+				+ "      " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);		
+		
+				
+	}//End of computeSelectionSort
+	
+	public static void computeQuickSort(){
+		//initializes the variables to keep up with the average
+		int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0,
+				compareAvgTenThousand = 0, assignAvgTenThousand = 0, compareAvgHundredThousand = 0, assignAvgHundredThousand = 0,
+				compareAvgMillion = 0, assignAvgMillion = 0;
+		
+		System.out.print("Quick Sort \t 100 \t      1000 \t    10000\t     100000 \t     1000000\n");
+		//controls the while loop
+		int loopcount = 1;
+		while(loopcount <= 5)
+		{
+			int[] arrayHundred = generateArray(100);
+			int[] arrayThousand = generateArray(1000);
+			int[] arrayTenThousand = generateArray(10000);
+			int[] arrayHundredThousand = generateArray(100000);
+			int[] arrayMillion = generateArray(1000000);
+			//this array will keep track of the comparisons and assignments
+			int[] compare = new int[5];
+			int[] assign = new int[5];
+			
+			comparisons = 0;
+			assignments = 0;			
+			quickSort(arrayHundred, 0, 99);
+			
+			compare[0] = comparisons;
+			assign[0] = assignments;
+			
+			compareAvgHundred += comparisons;
+			assignAvgHundred += assignments;
+			
+			comparisons = 0;
+			assignments = 0;			
+			quickSort(arrayThousand, 0, 999);
+			
+			compare[1] = comparisons;
+			assign[1] = assignments;
+			
+			compareAvgThousand += comparisons;
+			assignAvgThousand += assignments;
+			
+			comparisons = 0;
+			assignments = 0;
+			quickSort(arrayTenThousand, 0, 9999);
+			
+			compare[2] = comparisons;
+			assign[2] = assignments;
+			
+			compareAvgTenThousand += comparisons;
+			assignAvgTenThousand += assignments;
+			
+			comparisons = 0;
+			assignments = 0;
+			quickSort(arrayHundredThousand, 0, 99999);
+			
+			compare[3] = comparisons;
+			assign[3] = assignments;
+			
+			compareAvgHundredThousand += comparisons;
+			assignAvgHundredThousand += assignments;
+			
+			comparisons = 0;
+			assignments = 0;
+			quickSort(arrayMillion, 0, 999999);
+			
+			compare[4] = comparisons;
+			assign[4] = assignments;
+			
+			compareAvgMillion += comparisons;
+			assignAvgMillion += assignments;
+			
+			System.out.print(loopcount+ "\t       " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+							+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] + "\t " + compare[3] + "/" + assign[3] +
+							"\t " + compare[4] + "/" + assign[4] + "\n");
+			
+			loopcount++;
+			
+		}
+		System.out.print("Avg\t       " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+				+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5 + "     " + compareAvgHundredThousand/5 + "/" + 
+				assignAvgHundredThousand/5 + "  " + compareAvgMillion/5 + "/" + assignAvgMillion/5);		
+		 
+				
+	}//End of computeQuickSort
+	
+	public static void computeMergeSort(){
+		//initializes the variables to keep up with the average
+		int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0,
+				compareAvgTenThousand = 0, assignAvgTenThousand = 0, compareAvgHundredThousand = 0, assignAvgHundredThousand = 0,
+				compareAvgMillion = 0, assignAvgMillion = 0;
+		
+		System.out.print("Merge Sort \t 100 \t      1000 \t    10000\t     100000 \t        1000000\n");
+		//controls the while loop
+		int loopcount = 1;
+		while(loopcount <= 5)
+		{
+			int[] arrayHundred = generateArray(100);
+			int[] arrayThousand = generateArray(1000);
+			int[] arrayTenThousand = generateArray(10000);
+			int[] arrayHundredThousand = generateArray(100000);
+			int[] arrayMillion = generateArray(1000000);
+			//this array will keep track of the comparisons and assignments
+			int[] compare = new int[5];
+			int[] assign = new int[5];
+			
+			comparisons = 0;
+			assignments = 0;			
+			mergeSort(arrayHundred);
+			
+			compare[0] = comparisons;
+			assign[0] = assignments;
+			
+			compareAvgHundred += comparisons;
+			assignAvgHundred += assignments;
+			
+			comparisons = 0;
+			assignments = 0;			
+			mergeSort(arrayThousand);
+			
+			compare[1] = comparisons;
+			assign[1] = assignments;
+			
+			compareAvgThousand += comparisons;
+			assignAvgThousand += assignments;
+			
+			comparisons = 0;
+			assignments = 0;
+			mergeSort(arrayTenThousand);
+			
+			compare[2] = comparisons;
+			assign[2] = assignments;
+			
+			compareAvgTenThousand += comparisons;
+			assignAvgTenThousand += assignments;
+			
+			comparisons = 0;
+			assignments = 0;
+			mergeSort(arrayHundredThousand);
+			
+			compare[3] = comparisons;
+			assign[3] = assignments;
+			
+			compareAvgHundredThousand += comparisons;
+			assignAvgHundredThousand += assignments;
+			
+			comparisons = 0;
+			assignments = 0;
+			mergeSort(arrayMillion);
+			
+			compare[4] = comparisons;
+			assign[4] = assignments;
+			
+			compareAvgMillion += comparisons;
+			assignAvgMillion += assignments;
+			
+			System.out.print(loopcount+ "\t       " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+							+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] + "\t " + compare[3] + "/" + assign[3] +
+							"    " + compare[4] + "/" + assign[4] + "\n");
+			
+			loopcount++;
+			
+		}
+		System.out.print("Avg\t       " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+				+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5 + "    " + compareAvgHundredThousand/5 + "/" + 
+				assignAvgHundredThousand/5 + "    " + compareAvgMillion/5 + "/" + assignAvgMillion/5);		
+		 
+				
+	}//End of computeMergeSort
+	
+	
+
 
 }
