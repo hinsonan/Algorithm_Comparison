@@ -1,4 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Random;
+import java.util.Scanner;
 
 public class FinalProject {
 	
@@ -6,28 +12,389 @@ public class FinalProject {
 	static int comparisons = 0;
 	static int assignments = 0;
 	
+	
 	public static void main(String[] args) {
-		computeBubbleSort();	
+		//Scanner scan = new Scanner(System.in);
+		//System.out.print("Enter File Name: ");
+		//String file = scan.next();
 		
-		System.out.println(" ");
-		System.out.println(" ");
+		try {
+		      PrintWriter pw = new PrintWriter("C:\\Users\\hinso_000\\Desktop\\test.txt");
+		    //initializes the variables to keep up with the average
+				int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0, compareAvgTenThousand = 0,
+				assignAvgTenThousand = 0, compareAvgHundredThousand = 0, assignAvgHundredThousand = 0,
+				compareAvgMillion = 0, assignAvgMillion = 0;
+				System.out.print("Bubble Sort \t 100 \t\t1000 \t\t 10000\n");
+				pw.println("Bubble Sort \t 100 \t\t1000 \t\t 10000\n");
+				//controls the while loop
+				int loopcount = 1;
+				while(loopcount <= 5)
+				{
+					int[] arrayHundred = generateArray(100);
+					int[] arrayThousand = generateArray(1000);
+					int[] arrayTenThousand = generateArray(10000);
+					//this array will keep track of the comparisons and assignments
+					int[] compare = new int[3];
+					int[] assign = new int[3];
+					
+					bubbleSort(arrayHundred);
+					
+					compare[0] = comparisons;
+					assign[0] = assignments;
+					
+					compareAvgHundred += comparisons;
+					assignAvgHundred += assignments;
+					
+					bubbleSort(arrayThousand);
+					
+					compare[1] = comparisons;
+					assign[1] = assignments;
+					
+					compareAvgThousand += comparisons;
+					assignAvgThousand += assignments;
+					
+					
+					bubbleSort(arrayTenThousand);
+					
+					compare[2] = comparisons;
+					assign[2] = assignments;
+					
+					compareAvgTenThousand += comparisons;
+					assignAvgTenThousand += assignments;
+					
+					System.out.print(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] +"\n");
+					
+					pw.println(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] +"\n");
+					
+					loopcount++;
+					
+				}
+				System.out.print("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);
+				
+				pw.println("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);
+				
+				System.out.println(" ");
+				System.out.println(" ");
+				pw.println(" ");
+				pw.println(" ");
+				
+				System.out.print("Insertion Sort \t 100 \t\t1000 \t\t 10000\n");
+				pw.println("Insertion Sort \t 100 \t\t1000 \t\t 10000\n");
+				//reset the variables to 0
+				compareAvgHundred = 0; assignAvgHundred = 0; compareAvgThousand = 0; assignAvgThousand =0; compareAvgTenThousand = 0; assignAvgTenThousand = 0;
+				//controls the while loop
+				loopcount = 1;
+				while(loopcount <= 5)
+				{
+					int[] arrayHundred = generateArray(100);
+					int[] arrayThousand = generateArray(1000);
+					int[] arrayTenThousand = generateArray(10000);
+					//this array will keep track of the comparisons and assignments
+					int[] compare = new int[3];
+					int[] assign = new int[3];
+					
+					insertionSort(arrayHundred);
+					
+					compare[0] = comparisons;
+					assign[0] = assignments;
+					
+					compareAvgHundred += comparisons;
+					assignAvgHundred += assignments;
+					
+					insertionSort(arrayThousand);
+					
+					compare[1] = comparisons;
+					assign[1] = assignments;
+					
+					compareAvgThousand += comparisons;
+					assignAvgThousand += assignments;
+					
+					
+					insertionSort(arrayTenThousand);
+					
+					compare[2] = comparisons;
+					assign[2] = assignments;
+					
+					compareAvgTenThousand += comparisons;
+					assignAvgTenThousand += assignments;
+					
+					System.out.print(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] +"\n");
+					
+					pw.println(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] +"\n");
+					
+					loopcount++;
+					
+				}
+				System.out.print("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);	
+				
+				pw.println("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);
+				
+				System.out.println(" ");
+				System.out.println(" ");
+				pw.println(" ");
+				pw.println(" ");
+				
+				//reset the variables to keep up with the average
+				compareAvgHundred = 0; assignAvgHundred = 0; compareAvgThousand = 0; assignAvgThousand =0; compareAvgTenThousand = 0; assignAvgTenThousand = 0;
+				
+				System.out.print("Selection Sort \t 100 \t\t1000 \t\t 10000\n");
+				pw.println("Selection Sort \t 100 \t\t1000 \t\t 10000\n");
+				//controls the while loop
+				loopcount = 1;
+				while(loopcount <= 5)
+				{
+					int[] arrayHundred = generateArray(100);
+					int[] arrayThousand = generateArray(1000);
+					int[] arrayTenThousand = generateArray(10000);
+					//this array will keep track of the comparisons and assignments
+					int[] compare = new int[3];
+					int[] assign = new int[3];
+					
+					selectionSort(arrayHundred);
+					
+					compare[0] = comparisons;
+					assign[0] = assignments;
+					
+					compareAvgHundred += comparisons;
+					assignAvgHundred += assignments;
+					
+					selectionSort(arrayThousand);
+					
+					compare[1] = comparisons;
+					assign[1] = assignments;
+					
+					compareAvgThousand += comparisons;
+					assignAvgThousand += assignments;
+					
+					
+					selectionSort(arrayTenThousand);
+					
+					compare[2] = comparisons;
+					assign[2] = assignments;
+					
+					compareAvgTenThousand += comparisons;
+					assignAvgTenThousand += assignments;
+					
+					System.out.print(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t     "+compare[1]
+									+"/"+ assign[1]+ "      "+ compare[2]+ "/"+ assign[2] +"\n");
+					
+					pw.println(loopcount+ "\t      " + compare[0]+ "/" + assign[0]+ "\t     "+compare[1]
+									+"/"+ assign[1]+ "      "+ compare[2]+ "/"+ assign[2] +"\n");
+					
+					loopcount++;
+					
+				}
+				System.out.print("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t     " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "      " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);		
+				pw.println("Avg\t      " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t     " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "      " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5);
+				
+				System.out.println(" ");
+				System.out.println(" ");
+				pw.println(" ");
+				pw.println(" ");
+				
+				//resets the variables to keep up with the average
+				compareAvgHundred = 0; assignAvgHundred = 0; compareAvgThousand = 0; assignAvgThousand =0;
+						compareAvgTenThousand = 0; assignAvgTenThousand = 0; compareAvgHundredThousand = 0; assignAvgHundredThousand = 0;
+						compareAvgMillion = 0; assignAvgMillion = 0;
+				
+				System.out.print("Quick Sort \t 100 \t      1000 \t    10000\t     100000 \t     1000000\n");
+				pw.println("Quick Sort \t 100 \t      1000 \t    10000\t     100000 \t     1000000\n");
+				//controls the while loop
+				loopcount = 1;
+				while(loopcount <= 5)
+				{
+					int[] arrayHundred = generateArray(100);
+					int[] arrayThousand = generateArray(1000);
+					int[] arrayTenThousand = generateArray(10000);
+					int[] arrayHundredThousand = generateArray(100000);
+					int[] arrayMillion = generateArray(1000000);
+					//this array will keep track of the comparisons and assignments
+					int[] compare = new int[5];
+					int[] assign = new int[5];
+					
+					comparisons = 0;
+					assignments = 0;			
+					quickSort(arrayHundred, 0, 99);
+					
+					compare[0] = comparisons;
+					assign[0] = assignments;
+					
+					compareAvgHundred += comparisons;
+					assignAvgHundred += assignments;
+					
+					comparisons = 0;
+					assignments = 0;			
+					quickSort(arrayThousand, 0, 999);
+					
+					compare[1] = comparisons;
+					assign[1] = assignments;
+					
+					compareAvgThousand += comparisons;
+					assignAvgThousand += assignments;
+					
+					comparisons = 0;
+					assignments = 0;
+					quickSort(arrayTenThousand, 0, 9999);
+					
+					compare[2] = comparisons;
+					assign[2] = assignments;
+					
+					compareAvgTenThousand += comparisons;
+					assignAvgTenThousand += assignments;
+					
+					comparisons = 0;
+					assignments = 0;
+					quickSort(arrayHundredThousand, 0, 99999);
+					
+					compare[3] = comparisons;
+					assign[3] = assignments;
+					
+					compareAvgHundredThousand += comparisons;
+					assignAvgHundredThousand += assignments;
+					
+					comparisons = 0;
+					assignments = 0;
+					quickSort(arrayMillion, 0, 999999);
+					
+					compare[4] = comparisons;
+					assign[4] = assignments;
+					
+					compareAvgMillion += comparisons;
+					assignAvgMillion += assignments;
+					
+					System.out.print(loopcount+ "\t       " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] + "\t " + compare[3] + "/" + assign[3] +
+									"\t " + compare[4] + "/" + assign[4] + "\n");
+					
+					pw.println(loopcount+ "\t       " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] + "\t " + compare[3] + "/" + assign[3] +
+									"\t " + compare[4] + "/" + assign[4] + "\n");
+					
+					loopcount++;
+					
+				}
+				System.out.print("Avg\t       " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5 + "     " + compareAvgHundredThousand/5 + "/" + 
+						assignAvgHundredThousand/5 + "  " + compareAvgMillion/5 + "/" + assignAvgMillion/5);
+				
+				pw.println("Avg\t       " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5 + "     " + compareAvgHundredThousand/5 + "/" + 
+						assignAvgHundredThousand/5 + "  " + compareAvgMillion/5 + "/" + assignAvgMillion/5);
+				
+				System.out.println(" ");
+				System.out.println(" ");
+				pw.println(" ");
+				pw.println(" ");
+				
+				//resets the variables to keep up with the average
+				compareAvgHundred = 0; assignAvgHundred = 0; compareAvgThousand = 0; assignAvgThousand =0;
+				compareAvgTenThousand = 0; assignAvgTenThousand = 0; compareAvgHundredThousand = 0; assignAvgHundredThousand = 0;
+				compareAvgMillion = 0; assignAvgMillion = 0;
+				
+				System.out.print("Merge Sort \t 100 \t      1000 \t    10000\t     100000 \t        1000000\n");
+				pw.println("Merge Sort \t 100 \t      1000 \t    10000\t     100000 \t        1000000\n");
+				//controls the while loop
+				loopcount = 1;
+				while(loopcount <= 5)
+				{
+					int[] arrayHundred = generateArray(100);
+					int[] arrayThousand = generateArray(1000);
+					int[] arrayTenThousand = generateArray(10000);
+					int[] arrayHundredThousand = generateArray(100000);
+					int[] arrayMillion = generateArray(1000000);
+					//this array will keep track of the comparisons and assignments
+					int[] compare = new int[5];
+					int[] assign = new int[5];
+					
+					comparisons = 0;
+					assignments = 0;			
+					mergeSort(arrayHundred);
+					
+					compare[0] = comparisons;
+					assign[0] = assignments;
+					
+					compareAvgHundred += comparisons;
+					assignAvgHundred += assignments;
+					
+					comparisons = 0;
+					assignments = 0;			
+					mergeSort(arrayThousand);
+					
+					compare[1] = comparisons;
+					assign[1] = assignments;
+					
+					compareAvgThousand += comparisons;
+					assignAvgThousand += assignments;
+					
+					comparisons = 0;
+					assignments = 0;
+					mergeSort(arrayTenThousand);
+					
+					compare[2] = comparisons;
+					assign[2] = assignments;
+					
+					compareAvgTenThousand += comparisons;
+					assignAvgTenThousand += assignments;
+					
+					comparisons = 0;
+					assignments = 0;
+					mergeSort(arrayHundredThousand);
+					
+					compare[3] = comparisons;
+					assign[3] = assignments;
+					
+					compareAvgHundredThousand += comparisons;
+					assignAvgHundredThousand += assignments;
+					
+					comparisons = 0;
+					assignments = 0;
+					mergeSort(arrayMillion);
+					
+					compare[4] = comparisons;
+					assign[4] = assignments;
+					
+					compareAvgMillion += comparisons;
+					assignAvgMillion += assignments;
+					
+					System.out.print(loopcount+ "\t       " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] + "\t " + compare[3] + "/" + assign[3] +
+									"    " + compare[4] + "/" + assign[4] + "\n");
+					
+					pw.println(loopcount+ "\t       " + compare[0]+ "/" + assign[0]+ "\t   "+compare[1]
+									+"/"+ assign[1]+ "   "+ compare[2]+ "/"+ assign[2] + "\t " + compare[3] + "/" + assign[3] +
+									"    " + compare[4] + "/" + assign[4] + "\n");
+					
+					loopcount++;
+					
+				}
+				System.out.print("Avg\t       " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5 + "    " + compareAvgHundredThousand/5 + "/" + 
+						assignAvgHundredThousand/5 + "    " + compareAvgMillion/5 + "/" + assignAvgMillion/5);	
+				
+				pw.println("Avg\t       " + compareAvgHundred/5 + "/" + assignAvgHundred/5 + "\t   " + compareAvgThousand/5 + "/" + assignAvgThousand/5
+						+ "   " + compareAvgTenThousand/5 + "/" + assignAvgTenThousand/5 + "    " + compareAvgHundredThousand/5 + "/" + 
+						assignAvgHundredThousand/5 + "    " + compareAvgMillion/5 + "/" + assignAvgMillion/5);
+				 
+				 
+						
+						
+				
+		      pw.close();
+		} catch (IOException e) {
+			System.out.print("I'm sorry this file doesn't exist");
+		    }
 		
-		computeInsertionSort();
-		
-		System.out.println(" ");
-		System.out.println(" ");
-		
-		computeSelectionSort();
-		
-		System.out.println(" ");
-		System.out.println(" ");
-		
-		computeQuickSort();
-		
-		System.out.println(" ");
-		System.out.println(" ");
-		
-		computeMergeSort();
+				
 		
 		
 	}//End of main
