@@ -24,6 +24,7 @@ public class FinalProject {
 				int compareAvgHundred = 0, assignAvgHundred = 0, compareAvgThousand = 0, assignAvgThousand =0, compareAvgTenThousand = 0,
 				assignAvgTenThousand = 0, compareAvgHundredThousand = 0, assignAvgHundredThousand = 0,
 				compareAvgMillion = 0, assignAvgMillion = 0;
+				
 				System.out.print("Bubble Sort \t 100 \t\t1000 \t\t 10000\n");
 				pw.println("Bubble Sort \t 100 \t\t1000 \t\t 10000\n");
 				//controls the while loop
